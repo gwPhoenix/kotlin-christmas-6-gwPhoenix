@@ -7,22 +7,24 @@
 ### 2-1. 방문날짜 입력
 - [x] Computer - 방문날짜 입력요청 메시지 출력
 - [x] User - 날짜 입력
-    - [ ] System - 예외 체크 : 공백만 입력
-    - [ ] System - 예외 체크 : 숫자가 아닌 문자 입력
-    - [ ] System - 예외 체크 : 1~31을 제외한 숫자 입력
-        - [ ] Computer - 에러 출력 [ERROR]
+    - [x] System - 예외 체크 : 공백만 입력
+  
+    - [x] System - 예외 체크 : 숫자가 아닌 문자 입력
+    - [x] System - 예외 체크 : 1~31을 제외한 숫자 입력
+        - [x] Computer - 에러 출력 [ERROR]
 
 ### 2-2. 주문메뉴와 갯수 입력
 - [ ] Computer - 메뉴리스트 출력
 - [ ] Computer - 주문메뉴와 갯수 입력요청 메시지 출력
 - [ ] User - 주문메뉴와 갯수 입력
-    - [ ] System - 예외 체크 : 공백만 입력
+    - [x] System - 예외 체크 : 공백만 입력
+  
     - [ ] System - 예외 체크 : 없는 메뉴 입력
     - [ ] System - 예외 체크 : 메뉴형식이 다른 입력
     - [ ] System - 예외 체크 : 메뉴 중복 입력
     - [ ] System - 예외 체크 : 음료만 입력
     - [ ] System - 예외 체크 : 메뉴가 1보다 작거나 20개 초과 입력
-        - [ ] Computer - 에러 출력 [ERROR]
+        - [x] Computer - 에러 출력 [ERROR]
 
 ### 3. 주문 내역 및 혜택결과 출력
 - [ ] Computer - 주문메뉴 출력
