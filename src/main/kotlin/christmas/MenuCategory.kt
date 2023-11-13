@@ -1,6 +1,6 @@
 package christmas
 
-enum class MenuCategory(private val koreanMunuText: String) {
+enum class MenuCategory(private val koreanText: String) {
 
     APPETIZER("애피타이저"),
     MAIN("메인"),
@@ -8,20 +8,21 @@ enum class MenuCategory(private val koreanMunuText: String) {
     DRINK("음료");
 
     companion object {
+
         fun getAppetizer(): String {
-            return APPETIZER.koreanMunuText
+            return APPETIZER.koreanText
         }
 
         fun getMain(): String {
-            return MAIN.koreanMunuText
+            return MAIN.koreanText
         }
 
         fun getDessert(): String {
-            return DESSERT.koreanMunuText
+            return DESSERT.koreanText
         }
 
         fun getDrink(): String {
-            return DRINK.koreanMunuText
+            return DRINK.koreanText
         }
 
     }

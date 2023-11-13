@@ -32,6 +32,8 @@ enum class Output(private val textMessage: String) {
         }
 
         fun displayMenu(){
+            CheckSystem.keepOn = true // 두번째 while문 실행을 위해 초기화
+
             Output.getMessage(MENU_INVENTORY.toString())
             Output.getMenuInventory1()
             Output.getMenuInventory2()
@@ -58,8 +60,8 @@ enum class Output(private val textMessage: String) {
         fun getMenuInventory2() {
             println("<${MenuCategory.getDessert()}>")
             println(
-                "${Dessert.getChocolateCake()}(${priceFormat(Dessert.getChocolateCakePrice())}), " +
-                        " ${Dessert.getChocolateCake()}(${priceFormat(Dessert.getIceCreamPrice())})"
+                "${Dessert.getChocolateCake()}(${priceFormat(Dessert.getChocolateCakePrice())})," +
+                        " ${Dessert.getIceCream()}(${priceFormat(Dessert.getIceCreamPrice())})"
             )
             println("<${MenuCategory.getDrink()}>")
             println(

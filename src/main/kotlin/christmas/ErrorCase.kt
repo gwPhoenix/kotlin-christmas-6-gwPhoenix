@@ -34,6 +34,11 @@ class ErrorCase {
                 CheckSystem.checkResult =
                     DateCheck.not1To31(inputResult, errorMessage)
             }
+
+            if (!CheckSystem.checkResult) {
+                // 날짜=숫자가 이상없으면, 해당 날짜 저장
+                Input.saveDate(inputResult.toInt())
+            }
             return CheckSystem.checkResult
         }
 
@@ -44,6 +49,24 @@ class ErrorCase {
                 CheckSystem.checkResult =
                     MenuCheck.formCheck(inputResult, errorMessage)
             }
+            if(!CheckSystem.checkResult){
+                // 주문형식이 문제 없으면, 셋으로 변환 후 다시 맵으로 변환
+                Input.oderMenu = Input.toCatalog(inputResult)
+                Input.orderMenuInventory.clear() // 초기화
+                Input.orderMenuInventory = Input.catalogToLookupTable(Input.oderMenu)
+            }
+
+            if(Input.oderMenu.size != Input.orderMenuInventory.size){
+                //중복 메뉴 체크
+                Output.throwIllegalArgumentException(errorMessage)
+                return true
+            }
+
+            if(!CheckSystem.checkResult){
+                MenuCheck.getRealMenu()
+                CheckSystem.checkResult = MenuCheck.realMenu(Input.orderMenuInventory, errorMessage)
+            }
+            println("맵 : ${Input.orderMenuInventory}")
             return CheckSystem.checkResult
         }
     }
