@@ -15,7 +15,7 @@ class DateCheck {
         fun not1To31(
             inputResult: String, checkResult: Boolean, errorMessage: String
         ): Boolean {
-            require(inputResult.toIntOrNull() in 1..31 || inputResult.toIntOrNull() != null) {
+            require(inputResult.toIntOrNull() in 1..31) {
                 Output.throwIllegalArgumentException(errorMessage)
                 return true
             }

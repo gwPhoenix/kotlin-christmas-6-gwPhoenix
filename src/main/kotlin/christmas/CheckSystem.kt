@@ -11,19 +11,18 @@ class CheckSystem(private var inputResult: String, private var caseMessage: Stri
         fun start(inputResult: String, caseMessage: String, checkSys: Companion): Boolean {
             checkResult = ErrorCase.commonCheck(inputResult, caseMessage, checkSys)
             if (checkResult) {
-                return  true
+                return true
             } else {
                 when (caseMessage) {
-                    Output.REQUEST_DATA.toString() ->
+                    Output.REQUEST_DATE.toString() ->
                         checkResult =
                             ErrorCase.dateCheck(inputResult, checkResult, checkSys.dateMessage)
 
                     Output.REQUEST_MENU.toString() -> checkResult =
                         ErrorCase.menuCheck(inputResult, checkResult, checkSys.menuMessage)
-
                 }
+                return checkResult
             }
-            return false
         }
     }
 }

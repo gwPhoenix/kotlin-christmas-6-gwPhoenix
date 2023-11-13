@@ -27,10 +27,17 @@ class ErrorCase {
         fun dateCheck(
             inputResult: String, checkResult: Boolean, errorMessage: String
         ): Boolean {
-            /*CheckSystem.checkResult =
-                DateCheck.notNumber(inputResult, CheckSystem.checkResult, CheckSystem.dateMessage)
-            return CheckSystem.checkResult*/
-            TODO("작업중")
+
+            if (!checkResult) {
+                CheckSystem.checkResult =
+                    DateCheck.notNumber(inputResult, checkResult, errorMessage)
+            }
+
+            if (!CheckSystem.checkResult) {
+                CheckSystem.checkResult =
+                    DateCheck.not1To31(inputResult, CheckSystem.checkResult, errorMessage)
+            }
+            return CheckSystem.checkResult
         }
 
         fun menuCheck(
