@@ -2,7 +2,7 @@ package christmas
 
 class CommonCheck {
     companion object {
-        fun isGap(
+        fun isClearSpace(
             inputResult: String, caseMessage: String, checksys: CheckSystem.Companion
         ): Boolean {
             require(inputResult.replace(" ", "") != "") {

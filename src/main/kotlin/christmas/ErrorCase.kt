@@ -4,12 +4,11 @@ import christmas.CheckSystem.Companion.checkResult
 
 class ErrorCase {
     companion object {
-
         fun commonCheck(
             inputResult: String, caseMessage: String, checkSys: CheckSystem.Companion
         ): Boolean {
             if (!checkResult) {
-                checkResult = CommonCheck.isGap(inputResult, caseMessage, checkSys)
+                checkResult = CommonCheck.isClearSpace(inputResult, caseMessage, checkSys)
             }
             if (!checkResult) {
                 checkResult = CommonCheck.isBlank(inputResult, caseMessage, checkSys)
@@ -23,19 +22,17 @@ class ErrorCase {
             return checkResult
         }
 
-
         fun dateCheck(
             inputResult: String, checkResult: Boolean, errorMessage: String
         ): Boolean {
-
             if (!checkResult) {
                 CheckSystem.checkResult =
-                    DateCheck.notNumber(inputResult, checkResult, errorMessage)
+                    DateCheck.notNumber(inputResult, errorMessage)
             }
 
             if (!CheckSystem.checkResult) {
                 CheckSystem.checkResult =
-                    DateCheck.not1To31(inputResult, CheckSystem.checkResult, errorMessage)
+                    DateCheck.not1To31(inputResult, errorMessage)
             }
             return CheckSystem.checkResult
         }
@@ -43,7 +40,11 @@ class ErrorCase {
         fun menuCheck(
             inputResult: String, checkResult: Boolean, errorMessage: String
         ): Boolean {
-            TODO("작업중")
+            if (!checkResult) {
+                CheckSystem.checkResult =
+                    MenuCheck.formCheck(inputResult, errorMessage)
+            }
+            return CheckSystem.checkResult
         }
     }
 }

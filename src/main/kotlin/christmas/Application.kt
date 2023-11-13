@@ -17,6 +17,8 @@ fun main() {
     while (keepOn) {
         Output.getMessage(Output.REQUEST_MENU.toString())
         Input.result = Input.fromUser()
+        keepOn = CheckSystem.start(Input.result, Output.REQUEST_MENU.toString(), CheckSystem)
+        CheckSystem.checkResult = false // 오류 체크 상태값 다시 초기화
     }
 }
 
