@@ -1,23 +1,70 @@
 package christmas
 
+import christmas.Appetizer as Amenu
+import christmas.MainMenu as Mmenu
+
 enum class Output(private val textMessage: String) {
     START("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다."),
     REQUEST_DATE("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)"),
-    REQUEST_MENU("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
-
+    REQUEST_MENU("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 크리스마스파스타-2,제로콜라-2"),
+    MENU_INVENTORY("============================메뉴리스트==============================="),
+    MENU_LINE("===============================================================");
     companion object {
 
-        fun startMessage(){
+        fun startMessage() {
             println(START.textMessage)
         }
+
         fun getMessage(caseMessage: String) {
             when (caseMessage) {
-                REQUEST_DATE.toString() -> {
-                    println(REQUEST_DATE.textMessage)
-                }
-
-                REQUEST_MENU.toString() -> println(REQUEST_MENU)
+                REQUEST_DATE.toString() -> println(REQUEST_DATE.textMessage)
+                REQUEST_MENU.toString() -> println(REQUEST_MENU.textMessage)
+                MENU_INVENTORY.toString() -> println(MENU_INVENTORY.textMessage)
+                MENU_LINE.toString() -> println(MENU_LINE.textMessage)
             }
+        }
+
+        fun priceFormat(price: Int): String {
+            // 가격을 3자리씩 끊어서 포맷팅
+            return String.format("%,d", price)
+        }
+
+        fun displayMenu(){
+            Output.getMessage(MENU_INVENTORY.toString())
+            Output.getMenuInventory1()
+            Output.getMenuInventory2()
+            Output.getMessage(MENU_LINE.toString())
+        }
+
+        fun getMenuInventory1() {
+            println("<${MenuCategory.getAppetizer()}>")
+            println(
+                "${Amenu.getMushroomSoup()}(${priceFormat(Amenu.getMushroomSoupPrice())})," +
+                        " ${Amenu.getTapas()}(${priceFormat(Amenu.getTapasPrice())})," +
+                        " ${Amenu.getCaesarSalad()}(${priceFormat(Amenu.getCaesarSaladPrice())})"
+            )
+
+            println("<${MenuCategory.getMain()}>")
+            println(
+                "${Mmenu.getBBQLip()}(${priceFormat(Mmenu.getTboneSteakPrice())})," +
+                        " ${Mmenu.getBBQLip()}(${priceFormat(Mmenu.getBBQLipPrice())})," +
+                        " ${Mmenu.getSeafoodPasta()}(${priceFormat(Mmenu.getSeafoodPastaPrice())})," +
+                        " ${Mmenu.getXmasPasta()}(${priceFormat(Mmenu.getXmasPastaPrice())})"
+            )
+        }
+
+        fun getMenuInventory2() {
+            println("<${MenuCategory.getDessert()}>")
+            println(
+                "${Dessert.getChocolateCake()}(${priceFormat(Dessert.getChocolateCakePrice())}), " +
+                        " ${Dessert.getChocolateCake()}(${priceFormat(Dessert.getIceCreamPrice())})"
+            )
+            println("<${MenuCategory.getDrink()}>")
+            println(
+                "${Drink.getZeroCola()}(${priceFormat(Drink.getZeroColaPrice())})," +
+                        " ${Drink.getRedWine()}(${priceFormat(Drink.getRedWinePrice())})," +
+                        " ${Drink.getChampagne()}(${priceFormat(Drink.getChampagnePrice())})"
+            )
         }
 
         fun throwIllegalArgumentException(errorMessage: String) {
@@ -26,7 +73,6 @@ enum class Output(private val textMessage: String) {
             } catch (e: IllegalArgumentException) {
                 println(errorMessage)
             }
-
         }
 
         fun throwNumberFormatException(errorMessage: String) {
@@ -35,7 +81,8 @@ enum class Output(private val textMessage: String) {
             } catch (e: NumberFormatException) {
                 println(errorMessage)
             }
-
         }
     }
 }
+
+
