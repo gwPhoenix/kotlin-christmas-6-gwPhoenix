@@ -33,7 +33,7 @@ class MenuCheck {
         }
 
         fun realMenu(menu: MutableMap<String, Int>, errorMessage: String): Boolean {
-            orderMenu.clear() // 초기화
+            orderMenu.clear()
             for (clue in menu.keys) {
                 orderMenu.add(clue)
             }
@@ -60,16 +60,37 @@ class MenuCheck {
             temporaryMenu = temporaryMenu.replace(" ", "")
             allDrink = temporaryMenu.split(",").toMutableList()
 
-            orderMenu.clear() // 초기화
+            orderMenu.clear()
             for (clue in menu.keys) {
                 orderMenu.add(clue)
             }
-            println("카운트 : ${orderMenu.intersect(allDrink).count()}")
-            println("사이즈 : ${orderMenu.size}")
-            println("체크 : ${orderMenu.intersect(allDrink).count() == orderMenu.size}")
-
-
             require(orderMenu.intersect(allDrink).count() != orderMenu.size) {
+                Output.throwIllegalArgumentException(errorMessage)
+                return true
+            }
+            return false
+        }
+
+        fun zero(menu: MutableMap<String, Int>, errorMessage: String): Boolean {
+            for (clue in menu.keys) {
+                require(
+                    menu[clue].toString().toIntOrNull() != 0
+                ) {
+                    Output.throwIllegalArgumentException(errorMessage)
+                    return true
+                }
+            }
+            return false
+        }
+
+        fun overTwenty(menu: MutableMap<String, Int>, errorMessage: String): Boolean {
+            Input.menuQuantity = 0
+            for (clue in menu.keys) {
+                Input.menuQuantity += menu[clue]!!.toInt()
+            }
+
+            println("총 메뉴갯수 : ${Input.menuQuantity }")
+            require(Input.menuQuantity in 1..20) {
                 Output.throwIllegalArgumentException(errorMessage)
                 return true
             }

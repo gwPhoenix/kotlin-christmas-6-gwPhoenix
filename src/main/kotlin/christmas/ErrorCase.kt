@@ -46,8 +46,9 @@ class ErrorCase {
             }
             if (!CheckSystem.checkResult) {
                 // 주문형식이 문제 없으면, 셋으로 변환 후 다시 맵으로 변환
+                Input.oderMenu.clear()
                 Input.oderMenu = Input.toCatalog(inputResult)
-                Input.orderMenuInventory.clear() // 초기화
+                Input.orderMenuInventory.clear()
                 Input.orderMenuInventory = Input.catalogToLookupTable(Input.oderMenu)
             }
 
@@ -63,6 +64,15 @@ class ErrorCase {
             if(!CheckSystem.checkResult) {
                 CheckSystem.checkResult = MenuCheck.notOnlyDrink(Input.orderMenuInventory, errorMessage)
             }
+
+            if(!CheckSystem.checkResult) {
+                CheckSystem.checkResult = MenuCheck.zero(Input.orderMenuInventory, errorMessage)
+            }
+
+            if(!CheckSystem.checkResult) {
+                CheckSystem.checkResult = MenuCheck.overTwenty(Input.orderMenuInventory, errorMessage)
+            }
+
             println("맵 : ${Input.orderMenuInventory}")
             return CheckSystem.checkResult
         }

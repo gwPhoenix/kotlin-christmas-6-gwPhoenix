@@ -86,6 +86,18 @@ enum class Output(private val textMessage: String) {
                 println(errorMessage)
             }
         }
+
+        fun displayBill(){
+            Bill.displayDetail(Bill.EVENT_MESSAGE.toString())
+            Bill.displayDetail(Bill.ORDER_MENU.toString())
+            Bill.displayDetail(Bill.PAY_BEFORE_DISCOUNT.toString())
+            Bill.displayDetail(Bill.GIFT_MENU.toString())
+            Bill.displayDetail(Bill.BENEFIT_DETAIL.toString())
+            Bill.displayDetail(Bill.PAY_BENEFIT.toString())
+            Bill.displayDetail(Bill.PAY_AFTER_DISCOUNT.toString())
+            Bill.displayDetail(Bill.DECEMBER_EVENT_BADGE.toString())
+            Bill.loadBage()
+        }
     }
 }
 

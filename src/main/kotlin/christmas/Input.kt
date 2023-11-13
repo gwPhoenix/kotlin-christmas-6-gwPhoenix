@@ -8,6 +8,8 @@ class Input {
         var orderDate = 0
         var oderMenu = mutableSetOf<String>()
         var orderMenuInventory = mutableMapOf<String, Int>()
+        var menuQuantity = 0
+
         fun fromUser(): String {
             result = Console.readLine()
             return result
