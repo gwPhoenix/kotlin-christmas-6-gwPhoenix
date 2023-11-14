@@ -50,14 +50,8 @@ class Bill() {
     }
 
     companion object {
-        var orderMenuBag = mutableMapOf<String, Int>()
         var giftMenuBag = ""
         var benefitBag = mutableMapOf<String, Int>()
-
-        var discoutBeforePay = 0
-        var totalBenefit = 0
-        var discountAtferPay = 0
-
         var decemberBadge = ""
 
         fun displayDetail(separateText: String) {
@@ -76,7 +70,6 @@ class Bill() {
                 Benefit.DETAIL.toString() -> println("<${Benefit.DETAIL.getBenefit()}>")
                 Event.DECEMBER_BADGE.toString() -> {
                     println("<${Event.DECEMBER_BADGE.getEvent()}>")
-
                 }
             }
             println("")
@@ -87,6 +80,12 @@ class Bill() {
                 println("${clue} ${orderMenuInventory[clue]}개")
             }
         }
+
+        fun loadPayBeforeDiscount(){
+
+        }
+
+
 
         /* fun loadPay(separateText: String) {
              when (separateText) {
