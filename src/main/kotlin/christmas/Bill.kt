@@ -53,6 +53,7 @@ class Bill() {
         var giftMenuBag = ""
         var benefitBag = mutableMapOf<String, Int>()
         var decemberBadge = ""
+        var beforeDiscountPay = 0
 
         fun displayDetail(separateText: String) {
             when (separateText) {
@@ -63,7 +64,11 @@ class Bill() {
 
                 Menu.GIFT.toString() -> println("<${Menu.GIFT.getMenu()}>")
 
-                Pay.BEFORE_DISCOUNT.toString() -> println("<${Pay.BEFORE_DISCOUNT.getText()}>")
+                Pay.BEFORE_DISCOUNT.toString() -> {
+                    println("<${Pay.BEFORE_DISCOUNT.getText()}>")
+                    println(Output.priceFormat(loadPayBeforeDiscount()))
+                }
+
                 Pay.BENEFIT.toString() -> println("<${Pay.BENEFIT.getText()}>")
                 Pay.AFTER_DISCOUNT.toString() -> println("<${Pay.BEFORE_DISCOUNT.getText()}>")
 
@@ -76,35 +81,58 @@ class Bill() {
         }
 
         fun loadOderMenuInventory() {
-            for (clue in Input.orderMenuInventory.keys){
+            for (clue in orderMenuInventory.keys) {
                 println("${clue} ${orderMenuInventory[clue]}개")
             }
         }
 
-        fun loadPayBeforeDiscount(){
 
+        fun loadPayBeforeDiscount(): Int {
+            Pay.BEFORE_DISCOUNT.setPay(0)
+            beforeDiscountPay = 0
+            for (clue in orderMenuInventory.keys) {
+                beforeDiscountPay +=
+                    christmas.Menu.Appetizer.searchMenu(clue) * orderMenuInventory[clue]!!.toInt()
+                beforeDiscountPay +=
+                    christmas.Menu.MainMenu.searchMenu(clue) * orderMenuInventory[clue]!!.toInt()
+                beforeDiscountPay +=
+                    christmas.Menu.Drink.searchMenu(clue) * orderMenuInventory[clue]!!.toInt()
+                beforeDiscountPay +=
+                    christmas.Menu.Dessert.searchMenu(clue) * orderMenuInventory[clue]!!.toInt()
+
+            }
+            Pay.BEFORE_DISCOUNT.setPay(beforeDiscountPay)
+            return Pay.BEFORE_DISCOUNT.getPay()
         }
 
-
-
-        /* fun loadPay(separateText: String) {
-             when (separateText) {
-                 PAY_BEFORE_DISCOUNT.toString() -> println("할인 전 총주문 금액 출력")
-                 PAY_BENEFIT.toString() -> println("총혜택 금액 출력")
-                 PAY_AFTER_DISCOUNT.toString() -> println("할인 후 예상 결제 금액 출력")
-             }
-
-         }*/
-
-        /*fun loadBage(discountPay: Int) {
-            when (discountPay) {
-                discountPay > 20000 -> println("산타")
-                discountPay in 10000..19999 -> println("트리")
-                discountPay in 5000..9999 -> println("별")
-                else -> println("없음")
-                TODO("수정중")
+        fun loadGiftMenu(): String {
+            if (Pay.BEFORE_DISCOUNT.getPay() > 120000) {
+                return ""
             }
-
-        }*/
+            return ""
+            TODO(" 작업중")
+        }
     }
+
+
+    /* fun loadPay(separateText: String) {
+         when (separateText) {
+             PAY_BEFORE_DISCOUNT.toString() -> println("할인 전 총주문 금액 출력")
+             PAY_BENEFIT.toString() -> println("총혜택 금액 출력")
+             PAY_AFTER_DISCOUNT.toString() -> println("할인 후 예상 결제 금액 출력")
+         }
+
+     }*/
+
+    /*fun loadBage(discountPay: Int) {
+        when (discountPay) {
+            discountPay > 20000 -> println("산타")
+            discountPay in 10000..19999 -> println("트리")
+            discountPay in 5000..9999 -> println("별")
+            else -> println("없음")
+            TODO("수정중")
+        }
+
+    }*/
+
 }
