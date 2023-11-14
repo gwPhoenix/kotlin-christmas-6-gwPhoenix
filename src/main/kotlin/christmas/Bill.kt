@@ -1,15 +1,54 @@
 package christmas
 
-enum class Bill(private val koreanText: String) {
-    EVENT_MESSAGE("12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"),
-    ORDER_MENU("주문 메뉴"),
-    GIFT_MENU("증정 메뉴"),
-    BENEFIT_DETAIL("혜택 내역"),
-    DECEMBER_EVENT_BADGE("12월 이벤트 배지"),
+import christmas.Input.Companion.orderMenuInventory
 
-    PAY_BEFORE_DISCOUNT("할인 전 총주문 금액"),
-    PAY_BENEFIT("총혜택 금액"),
-    PAY_AFTER_DISCOUNT("할인 후 예상 결제 금액");
+class Bill() {
+    enum class Pay(private val koreanText: String, private var finalPrice: Int) {
+        BEFORE_DISCOUNT("할인 전 총주문 금액", 0),
+        BENEFIT("총혜택 금액", 0),
+        AFTER_DISCOUNT("할인 후 예상 결제 금액", 0);
+
+        fun getText(): String {
+            return this.koreanText
+        }
+
+        fun getPay(): Int {
+            return this.finalPrice
+        }
+
+        fun setPay(price: Int) {
+            this.finalPrice = price
+        }
+    }
+
+    enum class Menu(private val koreanText: String) {
+        ORDER("주문 메뉴"),
+        GIFT("증정 메뉴");
+
+        fun getMenu(): String {
+            return this.koreanText
+        }
+
+    }
+
+    enum class Event(private val koreanText: String) {
+        MESSAGE("12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"),
+        DECEMBER_BADGE("12월 이벤트 배지");
+
+        fun getEvent(): String {
+            return this.koreanText
+        }
+    }
+
+
+    enum class Benefit(private val koreanText: String) {
+        DETAIL("혜택 내역");
+
+        fun getBenefit(): String {
+            return this.koreanText
+        }
+    }
+
     companion object {
         var orderMenuBag = mutableMapOf<String, Int>()
         var giftMenuBag = ""
@@ -20,20 +59,45 @@ enum class Bill(private val koreanText: String) {
         var discountAtferPay = 0
 
         var decemberBadge = ""
+
         fun displayDetail(separateText: String) {
-            println("")
             when (separateText) {
-                ORDER_MENU.toString() -> println("<${ORDER_MENU.koreanText}>")
-                PAY_BEFORE_DISCOUNT.toString() -> println("<${PAY_BEFORE_DISCOUNT.koreanText}>")
-                GIFT_MENU.toString() -> println("<${GIFT_MENU.koreanText}>")
-                BENEFIT_DETAIL.toString() -> println("<${BENEFIT_DETAIL.koreanText}>")
-                PAY_BENEFIT.toString() -> println("<${PAY_BENEFIT.koreanText}>")
-                PAY_AFTER_DISCOUNT.toString() -> println("<${PAY_AFTER_DISCOUNT.koreanText}>")
-                DECEMBER_EVENT_BADGE.toString() -> println("<${DECEMBER_EVENT_BADGE.koreanText}>")
+                Menu.ORDER.toString() -> {
+                    println("<${Menu.ORDER.getMenu()}>")
+                    loadOderMenuInventory()
+                }
+
+                Menu.GIFT.toString() -> println("<${Menu.GIFT.getMenu()}>")
+
+                Pay.BEFORE_DISCOUNT.toString() -> println("<${Pay.BEFORE_DISCOUNT.getText()}>")
+                Pay.BENEFIT.toString() -> println("<${Pay.BENEFIT.getText()}>")
+                Pay.AFTER_DISCOUNT.toString() -> println("<${Pay.BEFORE_DISCOUNT.getText()}>")
+
+                Benefit.DETAIL.toString() -> println("<${Benefit.DETAIL.getBenefit()}>")
+                Event.DECEMBER_BADGE.toString() -> {
+                    println("<${Event.DECEMBER_BADGE.getEvent()}>")
+
+                }
+            }
+            println("")
+        }
+
+        fun loadOderMenuInventory() {
+            for (clue in Input.orderMenuInventory.keys){
+                println("${clue} ${orderMenuInventory[clue]}개")
             }
         }
 
-        fun loadBage(discountPay: Int) {
+        /* fun loadPay(separateText: String) {
+             when (separateText) {
+                 PAY_BEFORE_DISCOUNT.toString() -> println("할인 전 총주문 금액 출력")
+                 PAY_BENEFIT.toString() -> println("총혜택 금액 출력")
+                 PAY_AFTER_DISCOUNT.toString() -> println("할인 후 예상 결제 금액 출력")
+             }
+
+         }*/
+
+        /*fun loadBage(discountPay: Int) {
             when (discountPay) {
                 discountPay > 20000 -> println("산타")
                 discountPay in 10000..19999 -> println("트리")
@@ -42,6 +106,6 @@ enum class Bill(private val koreanText: String) {
                 TODO("수정중")
             }
 
-        }
+        }*/
     }
 }

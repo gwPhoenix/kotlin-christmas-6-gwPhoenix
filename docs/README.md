@@ -28,7 +28,7 @@
         - [x] Computer - 에러 출력 [ERROR]
 
 ### 3. 주문 내역 및 혜택결과 출력
-- [ ] Computer - 주문메뉴 출력
+- [x] Computer - 주문메뉴 출력
 - [ ] Computer - 할인전 총 주문금액 계산
 - [ ] Computer - 할인전 총 주문금액 출력
 - [ ] Computer - 증정메뉴 체크
