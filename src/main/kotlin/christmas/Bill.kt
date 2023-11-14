@@ -55,22 +55,35 @@ class Bill() {
         var decemberBadge = ""
         var beforeDiscountPay = 0
 
-        fun displayDetail(separateText: String) {
+        fun displayDetailPay(separateText: String) {
+            when (separateText) {
+                Pay.BEFORE_DISCOUNT.toString() -> {
+                    println("<${Pay.BEFORE_DISCOUNT.getText()}>")
+                    println(Output.priceFormat(loadPayBeforeDiscount()))
+                }
+
+                Pay.BENEFIT.toString() -> {
+                    println("<${Pay.BENEFIT.getText()}>")
+                }
+
+                Pay.AFTER_DISCOUNT.toString() -> {
+                    println("<${Pay.BEFORE_DISCOUNT.getText()}>")
+                }
+            }
+            println("")
+        }
+
+        fun displayDetailNotPay(separateText: String) {
             when (separateText) {
                 Menu.ORDER.toString() -> {
                     println("<${Menu.ORDER.getMenu()}>")
                     loadOderMenuInventory()
                 }
 
-                Menu.GIFT.toString() -> println("<${Menu.GIFT.getMenu()}>")
-
-                Pay.BEFORE_DISCOUNT.toString() -> {
-                    println("<${Pay.BEFORE_DISCOUNT.getText()}>")
-                    println(Output.priceFormat(loadPayBeforeDiscount()))
+                Menu.GIFT.toString() -> {
+                    println("<${Menu.GIFT.getMenu()}>")
+                    println(loadGiftMenu())
                 }
-
-                Pay.BENEFIT.toString() -> println("<${Pay.BENEFIT.getText()}>")
-                Pay.AFTER_DISCOUNT.toString() -> println("<${Pay.BEFORE_DISCOUNT.getText()}>")
 
                 Benefit.DETAIL.toString() -> println("<${Benefit.DETAIL.getBenefit()}>")
                 Event.DECEMBER_BADGE.toString() -> {
@@ -99,7 +112,6 @@ class Bill() {
                     christmas.Menu.Drink.searchMenu(clue) * orderMenuInventory[clue]!!.toInt()
                 beforeDiscountPay +=
                     christmas.Menu.Dessert.searchMenu(clue) * orderMenuInventory[clue]!!.toInt()
-
             }
             Pay.BEFORE_DISCOUNT.setPay(beforeDiscountPay)
             return Pay.BEFORE_DISCOUNT.getPay()
@@ -107,10 +119,9 @@ class Bill() {
 
         fun loadGiftMenu(): String {
             if (Pay.BEFORE_DISCOUNT.getPay() > 120000) {
-                return ""
+                return "샴페인 1개"
             }
-            return ""
-            TODO(" 작업중")
+            return "없음"
         }
     }
 

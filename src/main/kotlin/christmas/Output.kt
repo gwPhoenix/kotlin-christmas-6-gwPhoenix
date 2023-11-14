@@ -69,14 +69,16 @@ enum class Output(private val textMessage: String) {
 
         fun displayBill() {
             println(BILL_INVENTORY.textMessage)
-            Bill.displayDetail(Bill.Event.MESSAGE.toString())
-            Bill.displayDetail(Bill.Menu.ORDER.toString())
-            Bill.displayDetail(Bill.Pay.BEFORE_DISCOUNT.toString())
-            Bill.displayDetail(Bill.Menu.GIFT.toString())
-            Bill.displayDetail(Bill.Benefit.DETAIL.toString())
-            Bill.displayDetail(Bill.Pay.BENEFIT.toString())
-            Bill.displayDetail(Bill.Pay.AFTER_DISCOUNT.toString())
-            Bill.displayDetail(Bill.Event.DECEMBER_BADGE.toString())
+            Bill.displayDetailNotPay(Bill.Event.MESSAGE.toString())
+            Bill.displayDetailNotPay(Bill.Menu.ORDER.toString())
+            Bill.displayDetailPay(Bill.Pay.BEFORE_DISCOUNT.toString())
+            Bill.displayDetailNotPay(Bill.Menu.GIFT.toString())
+
+            Bill.displayDetailNotPay(Bill.Benefit.DETAIL.toString())
+            Bill.displayDetailPay(Bill.Pay.BENEFIT.toString())
+            Bill.displayDetailPay(Bill.Pay.AFTER_DISCOUNT.toString())
+
+            Bill.displayDetailNotPay(Bill.Event.DECEMBER_BADGE.toString())
         }
 
         fun priceFormat(price: Int): String {

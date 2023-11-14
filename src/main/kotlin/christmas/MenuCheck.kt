@@ -21,10 +21,10 @@ class MenuCheck {
         fun getMenuBoard() {
             MenuBoard.clear()
 
-            MenuBoard.add(MainMenu.Drink.getallDrink())
-            MenuBoard.add(MainMenu.Appetizer.getallAppetizer())
-            MenuBoard.add(MainMenu.MainMenu.getallMain())
-            MenuBoard.add(MainMenu.Dessert.getallDessert())
+            MenuBoard.add(Menu.Drink.getallDrink())
+            MenuBoard.add(Menu.Appetizer.getallAppetizer())
+            MenuBoard.add(Menu.MainMenu.getallMain())
+            MenuBoard.add(Menu.Dessert.getallDessert())
 
             // intersect 적용되지 않아, 리스트 재변환
             temporaryMenu = MenuBoard.toString().replace("[", "")
@@ -55,7 +55,7 @@ class MenuCheck {
         }
 
         fun notOnlyDrink(menu: MutableMap<String, Int>, errorMessage: String): Boolean {
-            allDrink.add(MainMenu.Drink.getallDrink().toString())
+            allDrink.add(Menu.Drink.getallDrink().toString())
             temporaryMenu = allDrink.toString().replace("[", "")
             temporaryMenu = temporaryMenu.replace("]", "")
             temporaryMenu = temporaryMenu.replace(" ", "")

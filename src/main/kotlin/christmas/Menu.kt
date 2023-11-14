@@ -228,9 +228,7 @@ class Menu() {
 
             fun getPrice(searchKeword: String): Int {
                 for (dessertValues in entries) {
-                    println("여기 들어온거야 그거1")
                     if (dessertValues.koreanText == searchKeword) {
-                        println("여기 들어온거야 그거2")
                         return dessertValues.price
                     }
                 }
