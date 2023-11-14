@@ -1,6 +1,7 @@
 package christmas
 
 import christmas.Bill.Companion.beforeDiscountPay
+import christmas.Input.Companion.orderMenuInventory
 
 class Menu() {
 
@@ -12,6 +13,7 @@ class Menu() {
         companion object {
             var appetizerInventoryText = ""
             var appetizerInventory = mutableListOf<String>()
+            var appetizerBenefitsAmount = 0
 
             fun getKoreanMenu(appetizer: Appetizer): String {
                 return appetizer.koreanText
@@ -52,20 +54,8 @@ class Menu() {
                 return valueInventory
             }
 
-            fun getDrinkDessertInventory(): Int {
-                for (clue in Input.orderMenuInventory.keys) {
-                    appetizerInventoryText = Drink.getallDrink()
-                    Dessert.dessertInventoryText = appetizerInventoryText.replace(" ", "")
-                    appetizerInventory = appetizerInventoryText.split(",").toMutableList()
 
-                    if (clue.split(",").intersect(appetizerInventory).isNotEmpty()) {
-                        beforeDiscountPay += Drink.getPrice(clue)
-                    }
-                }
-                return beforeDiscountPay
-            }
-
-            fun searchMenu(searchKeword: String): Int {
+            fun searchMenuPrice(searchKeword: String): Int {
                 beforeDiscountPay = 0
                 beforeDiscountPay += Appetizer.getPrice(searchKeword)
                 return beforeDiscountPay
@@ -83,6 +73,7 @@ class Menu() {
         companion object {
             var mainInventoryText = ""
             var mainInventory = mutableListOf<String>()
+            var mainBenefitsAmount = 0
 
             fun getKoreanMenu(mainMenu: MainMenu): String {
                 return mainMenu.koreanText
@@ -123,23 +114,34 @@ class Menu() {
                 return valueInventory
             }
 
-            fun getMainInventory(): Int {
-                for (clue in Input.orderMenuInventory.keys) {
-                    mainInventoryText = MainMenu.getallMain()
-                    mainInventoryText = mainInventoryText.replace(" ", "")
-                    mainInventory = mainInventoryText.split(",").toMutableList()
-
-                    if (clue.split(",").intersect(mainInventory).isNotEmpty()) {
-                        beforeDiscountPay += MainMenu.getPrice(clue)
-                    }
-                }
-                return beforeDiscountPay
-            }
-
-            fun searchMenu(searchKeword: String): Int {
+            fun searchMenuPrice(searchKeword: String): Int {
                 beforeDiscountPay = 0
                 beforeDiscountPay += MainMenu.getPrice(searchKeword)
                 return beforeDiscountPay
+            }
+
+            fun getMainInventory(): Int {
+                mainInventoryText = ""
+                mainInventory.clear()
+                mainBenefitsAmount = 0
+
+                mainInventoryText = MainMenu.getallMain()
+                mainInventoryText = mainInventoryText.replace(" ", "")
+                mainInventory = mainInventoryText.split(",").toMutableList()
+                for (clue in mainInventory) {
+                    mainBenefitsAmount += checkMainInventory(clue)
+                }
+                return mainBenefitsAmount
+            }
+
+            fun checkMainInventory(searchKey: String): Int {
+                mainBenefitsAmount = 0
+                for (clue in orderMenuInventory.keys) {
+                    if (clue == searchKey) {
+                        mainBenefitsAmount += orderMenuInventory[clue]!!
+                    }
+                }
+                return mainBenefitsAmount
             }
         }
     }
@@ -152,6 +154,7 @@ class Menu() {
         companion object {
             var drinkInventoryText = ""
             var drinkInventory = mutableListOf<String>()
+            var drinkBenefitsAmount = 0
 
             fun getKoreanMenu(drink: Drink): String {
                 return drink.koreanText
@@ -192,20 +195,7 @@ class Menu() {
                 return valueInventory
             }
 
-            fun getDrinkInventory(): Int {
-                for (clue in Input.orderMenuInventory.keys) {
-                    drinkInventoryText = Drink.getallDrink()
-                    drinkInventoryText = drinkInventoryText.replace(" ", "")
-                    drinkInventory = drinkInventoryText.split(",").toMutableList()
-
-                    if (clue.split(",").intersect(MainMenu.mainInventory).isNotEmpty()) {
-                        beforeDiscountPay += Drink.getPrice(clue)
-                    }
-                }
-                return beforeDiscountPay
-            }
-
-            fun searchMenu(searchKeword: String): Int {
+            fun searchMenuPrice(searchKeword: String): Int {
                 beforeDiscountPay = 0
                 beforeDiscountPay += Drink.getPrice(searchKeword)
                 return beforeDiscountPay
@@ -221,6 +211,7 @@ class Menu() {
         companion object {
             var dessertInventoryText = ""
             var dessertInventory = mutableListOf<String>()
+            var dessertBenefitsAmount = 0
 
             fun getKoreanMenu(dessert: Dessert): String {
                 return dessert.koreanText
@@ -274,7 +265,7 @@ class Menu() {
                 return beforeDiscountPay
             }
 
-            fun searchMenu(searchKeword: String): Int {
+            fun searchMenuPrice(searchKeword: String): Int {
                 beforeDiscountPay = 0
                 beforeDiscountPay += Dessert.getPrice(searchKeword)
                 return beforeDiscountPay
