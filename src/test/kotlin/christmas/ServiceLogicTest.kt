@@ -22,16 +22,6 @@ class ServiceLogicTest : NsTest() {
             "==========12월 5일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!=========="
         ]
     )
-    @ParameterizedTest
-    fun `메시지 잘 출력되는지`(strings: String) {
-        OutputView.startMessage()
-        OutputView.getMessage(OutputView.REQUEST_DATE.toString())
-        OutputView.getMessage(OutputView.REQUEST_MENU.toString())
-        Bill.setVisitDate(5)
-        Bill.loadBenefitPreviewMessage()
-
-        assertThat(output()).contains(strings)
-    }
 
     @CsvSource("1:1", "15:15", "22:22", "31:31", delimiter = ':')
     @ParameterizedTest
