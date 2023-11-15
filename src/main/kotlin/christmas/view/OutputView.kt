@@ -10,13 +10,13 @@ enum class OutputView(private val textMessage: String) {
     REQUEST_DATE("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)"),
     REQUEST_MENU("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (ex.크리스마스파스타-2, 제로콜라-2)"),
     MENU_INVENTORY(
-        "================================메뉴리스트==================================="
+        "================================메뉴리스트============================"
     ),
     MENU_LINE(
-        "==========================================================================="
+        "===================================================================="
     ),
     BILL_INVENTORY(
-        " ================================주문내역서==================================="
+        "======12월 ${InputView.orderDate}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!======"
     );
 
     companion object {
@@ -74,7 +74,6 @@ enum class OutputView(private val textMessage: String) {
 
         fun displayBill() {
             println(BILL_INVENTORY.textMessage)
-            Bill.displayDetailNotPay(Bill.Event.MESSAGE.toString())
             Bill.displayDetailNotPay(Bill.Menu.ORDER.toString())
             Bill.displayDetailPay(Bill.Pay.BEFORE_DISCOUNT.toString())
             Bill.displayDetailNotPay(Bill.Menu.GIFT.toString())

@@ -10,8 +10,12 @@ class Calendar {
         SEVENTEEN(17),
         TWENTY_FOUR(24), TWENTY_FIVE(25),
         THIRTY_ONE31(31);
+    }
 
-
+    enum class eventBadge(koreanText: String, basePrice: Int) {
+        STAR("별", 5000),
+        TREE("트리", 10000),
+        SANTA("산타", 20000);
     }
 
     companion object {

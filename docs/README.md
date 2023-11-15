@@ -33,10 +33,10 @@
 - [x] Computer - 할인전 총 주문금액 출력
 - [x] Computer - 증정메뉴 체크
 - [x] Computer - 증정메뉴 출력
-- [ ] Computer - 혜택내역 체크
-- [ ] Computer - 혜택내역 출력
-- [ ] Computer - 총 혜택금액 계산
-- [ ] Computer - 총 혜택금액 출력
+- [x] Computer - 혜택내역 체크
+- [x] Computer - 혜택내역 출력
+- [x] Computer - 총 혜택금액 계산
+- [x] Computer - 총 혜택금액 출력
 - [ ] Computer - 예상 결제금액 계산
 - [ ] Computer - 예상 결제금액 출력
 - [ ] Computer - 이벤트배지 체크

@@ -20,11 +20,11 @@ enum class Benefits(private val koeanText: String, private var benefitBonus: Int
     GIFT_EVENT("증정 이벤트", 0);
     // "총 주문금액 12만원 이상, 샴페인 1개 = 25000원 혜택"
 
-    private fun getBonus(): Int {
+    fun getBonus(): Int {
         return this.benefitBonus
     }
 
-    private fun setBonus(bonus: Int) {
+    fun setBonus(bonus: Int) {
         this.benefitBonus = bonus
     }
 
@@ -44,15 +44,22 @@ enum class Benefits(private val koeanText: String, private var benefitBonus: Int
                     println("${WEEKEND_DISCOUNT.koeanText} : -${WEEKEND_DISCOUNT.benefitBonus}원")
                 }
 
-                if(getSpecialStar() > 0){
+                if (getSpecialStar() > 0) {
                     println("${SPECIAL_DISCOUNT.koeanText} : -${SPECIAL_DISCOUNT.benefitBonus}원")
                 }
 
+                if (GIFT_EVENT.getBonus() == 25000) {
+                    println("${GIFT_EVENT.koeanText} : -${GIFT_EVENT.benefitBonus}원")
+                }
+
+            } else {
+                println("없음")
             }
 
         }
 
         private fun getXmasDday(): Int {
+            X_MAS_D_DAY.setBonus(0)
             benefitInventory = 0
             if (InputView.orderDate in 1..25) {
                 benefitInventory = 1000 + ((InputView.orderDate - 1) * 100)
@@ -62,6 +69,7 @@ enum class Benefits(private val koeanText: String, private var benefitBonus: Int
         }
 
         private fun getWeekDay(): Int {
+            WEEKDAY_DISCOUNT.setBonus(0)
             benefitInventory = 0
             if (Calendar.weekendCheck(InputView.orderDate) != DayOfWeek.SATURDAY
                 && Calendar.weekendCheck(InputView.orderDate) != DayOfWeek.FRIDAY
@@ -73,6 +81,7 @@ enum class Benefits(private val koeanText: String, private var benefitBonus: Int
         }
 
         private fun getWeekend(): Int {
+            WEEKEND_DISCOUNT.setBonus(0)
             benefitInventory = 0
             if ((Calendar.weekendCheck(InputView.orderDate) == DayOfWeek.SATURDAY
                         || Calendar.weekendCheck(InputView.orderDate) == DayOfWeek.FRIDAY)
@@ -83,10 +92,11 @@ enum class Benefits(private val koeanText: String, private var benefitBonus: Int
             return benefitInventory
         }
 
-        private fun getSpecialStar() : Int{
+        private fun getSpecialStar(): Int {
+            SPECIAL_DISCOUNT.setBonus(0)
             benefitInventory = 0
             Calendar.starDayInventory = Calendar.getAllStarDay()
-            if(Calendar.starDayInventory.contains(InputView.orderDate)){
+            if (Calendar.starDayInventory.contains(InputView.orderDate)) {
                 benefitInventory = 1000
             }
             SPECIAL_DISCOUNT.setBonus(benefitInventory)

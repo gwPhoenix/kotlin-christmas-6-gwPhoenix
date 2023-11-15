@@ -37,7 +37,6 @@ class Bill() {
     }
 
     enum class Event(private val koreanText: String) {
-        MESSAGE("12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"),
         DECEMBER_BADGE("12월 이벤트 배지");
 
         fun getEvent(): String {
@@ -55,20 +54,20 @@ class Bill() {
     }
 
     companion object {
-        var giftMenuBag = ""
-        var benefitBag = mutableMapOf<String, Int>()
         var decemberBadge = ""
         var beforeDiscountPay = 0
+        var benefitsPay = 0
 
         fun displayDetailPay(separateText: String) {
             when (separateText) {
                 Pay.BEFORE_DISCOUNT.toString() -> {
                     println("<${Pay.BEFORE_DISCOUNT.getText()}>")
-                    println(OutputView.priceFormat(loadPayBeforeDiscount()))
+                    loadPayBeforeDiscount()
                 }
 
                 Pay.BENEFIT.toString() -> {
                     println("<${Pay.BENEFIT.getText()}>")
+                    loadBenefitsPay()
                 }
 
                 Pay.AFTER_DISCOUNT.toString() -> {
@@ -109,7 +108,7 @@ class Bill() {
         }
 
 
-        fun loadPayBeforeDiscount(): Int {
+        fun loadPayBeforeDiscount() {
             Pay.BEFORE_DISCOUNT.setPay(0)
             beforeDiscountPay = 0
             for (clue in orderMenuInventory.keys) {
@@ -123,19 +122,33 @@ class Bill() {
                     Dessert.searchMenuPrice(clue) * orderMenuInventory[clue]!!.toInt()
             }
             Pay.BEFORE_DISCOUNT.setPay(beforeDiscountPay)
-            return Pay.BEFORE_DISCOUNT.getPay()
+            println(OutputView.priceFormat(Pay.BEFORE_DISCOUNT.getPay()))
+        }
+
+        fun loadBenefitsPay() {
+            Pay.BENEFIT.setPay(0)
+            benefitsPay = 0
+
+            benefitsPay += Benefits.X_MAS_D_DAY.getBonus()
+            benefitsPay += Benefits.WEEKDAY_DISCOUNT.getBonus()
+            benefitsPay += Benefits.WEEKEND_DISCOUNT.getBonus()
+            benefitsPay += Benefits.SPECIAL_DISCOUNT.getBonus()
+            benefitsPay += Benefits.GIFT_EVENT.getBonus()
+
+            Pay.BENEFIT.setPay(benefitsPay)
+            println(OutputView.priceFormat(Pay.BENEFIT.getPay()))
         }
 
         fun loadGiftMenu(): String {
             if (Pay.BEFORE_DISCOUNT.getPay() >= 120000) {
+                Benefits.GIFT_EVENT.setBonus(25000)
                 return "샴페인 1개"
             }
             return "없음"
         }
 
-        fun loadBenifits() {
+        private fun loadBenifits() {
             Benefits.getAllBenefits()
-
         }
     }
 }
