@@ -71,7 +71,8 @@ class Bill() {
                 }
 
                 Pay.AFTER_DISCOUNT.toString() -> {
-                    println("<${Pay.BEFORE_DISCOUNT.getText()}>")
+                    println("<${Pay.AFTER_DISCOUNT.getText()}>")
+                    loadPayAfterDiscount()
                 }
             }
             println("")
@@ -133,6 +134,7 @@ class Bill() {
             benefitsPay += Benefits.WEEKDAY_DISCOUNT.getBonus()
             benefitsPay += Benefits.WEEKEND_DISCOUNT.getBonus()
             benefitsPay += Benefits.SPECIAL_DISCOUNT.getBonus()
+
             benefitsPay += Benefits.GIFT_EVENT.getBonus()
 
             Pay.BENEFIT.setPay(benefitsPay)
@@ -140,6 +142,7 @@ class Bill() {
         }
 
         fun loadGiftMenu(): String {
+            Benefits.GIFT_EVENT.setBonus(0)
             if (Pay.BEFORE_DISCOUNT.getPay() >= 120000) {
                 Benefits.GIFT_EVENT.setBonus(25000)
                 return "샴페인 1개"
@@ -147,21 +150,27 @@ class Bill() {
             return "없음"
         }
 
-        private fun loadBenifits() {
+        fun loadBenifits() {
             Benefits.getAllBenefits()
+        }
+
+        fun loadPayAfterDiscount() {
+            Pay.BENEFIT.setPay(0)
+            benefitsPay = 0
+
+            benefitsPay += Benefits.X_MAS_D_DAY.getBonus()
+            benefitsPay += Benefits.WEEKDAY_DISCOUNT.getBonus()
+            benefitsPay += Benefits.WEEKEND_DISCOUNT.getBonus()
+            benefitsPay += Benefits.SPECIAL_DISCOUNT.getBonus()
+
+            Pay.AFTER_DISCOUNT.setPay(Pay.BEFORE_DISCOUNT.getPay() - benefitsPay)
+            println(OutputView.priceFormat(Pay.AFTER_DISCOUNT.getPay()))
         }
     }
 }
 
 
-/* fun loadPay(separateText: String) {
-     when (separateText) {
-         PAY_BEFORE_DISCOUNT.toString() -> println("할인 전 총주문 금액 출력")
-         PAY_BENEFIT.toString() -> println("총혜택 금액 출력")
-         PAY_AFTER_DISCOUNT.toString() -> println("할인 후 예상 결제 금액 출력")
-     }
 
- }*/
 
 /*fun loadBage(discountPay: Int) {
     when (discountPay) {
