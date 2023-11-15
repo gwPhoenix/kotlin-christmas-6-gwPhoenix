@@ -5,9 +5,7 @@ import christmas.view.InputView
 import christmas.view.OutputView
 
 class MenuCheck {
-
     companion object {
-
         private val menuCheckRegularExpression = Regex("""^[가-힣]+-\d+(,\s*[가-힣]+-\d+)*$""")
         private val orderMenu = mutableListOf<String>()
 

@@ -44,7 +44,6 @@ class Bill() {
         }
     }
 
-
     enum class Benefit(private val koreanText: String) {
         DETAIL("혜택 내역");
 
@@ -58,7 +57,7 @@ class Bill() {
         private var benefitpPeviewMessage = ""
 
         var beforeDiscountPay = 0
-        var benefitsPay = 0
+        private var benefitsPay = 0
 
         fun setVisitDate(date: Int) {
             this.orderDate = date
@@ -181,7 +180,6 @@ class Bill() {
         private fun loadBenifits() {
             Benefits.getAllBenefits()
         }
-
 
         private fun loadEventBadge() {
             var pay = loadBenefitsPay()

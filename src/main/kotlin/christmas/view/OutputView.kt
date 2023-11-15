@@ -7,7 +7,6 @@ import christmas.restaurant.MenuCategory
 import christmas.view.InputView.Companion.saveDate
 
 enum class OutputView(private val textMessage: String) {
-
     START("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다."),
     REQUEST_DATE("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)"),
     REQUEST_MENU("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (ex.크리스마스파스타-2, 제로콜라-2)"),
@@ -17,9 +16,6 @@ enum class OutputView(private val textMessage: String) {
     MENU_LINE(
         "===================================================================="
     );
-
-
-
 
     companion object {
         fun startMessage() {
@@ -73,7 +69,7 @@ enum class OutputView(private val textMessage: String) {
             }
         }
 
-        fun displayBill(visitDate:Int) {
+        fun displayBill(visitDate: Int) {
             Bill.setVisitDate(visitDate)
             Bill.loadBenefitPreviewMessage()
 

@@ -21,7 +21,6 @@ fun main() {
         keepOn = CheckSystem.start(InputView.result, OutputView.REQUEST_MENU.toString())
         CheckSystem.checkResult = false // 오류 체크 상태값 다시 초기화
     }
-
     OutputView.displayBill(InputView.orderDate)
 
 }

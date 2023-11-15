@@ -56,7 +56,6 @@ enum class Benefits(private val koeanText: String, private var benefitBonus: Int
             } else {
                 println("없음")
             }
-
         }
 
         private fun getXmasDday(): Int {
