@@ -25,10 +25,10 @@ class MenuCheck {
         fun getMenuBoard() {
             MenuBoard.clear()
 
-            MenuBoard.add(Menu.Drink.getallDrink())
-            MenuBoard.add(Menu.Appetizer.getallAppetizer())
-            MenuBoard.add(Menu.MainMenu.getallMain())
-            MenuBoard.add(Menu.Dessert.getallDessert())
+            MenuBoard.add(Menu.Drink.getAllDrink())
+            MenuBoard.add(Menu.Appetizer.getAllAppetizer())
+            MenuBoard.add(Menu.MainMenu.getAllMain())
+            MenuBoard.add(Menu.Dessert.getAllDessert())
 
             // intersect 적용되지 않아, 리스트 재변환
             temporaryMenu = MenuBoard.toString().replace("[", "")
@@ -59,7 +59,7 @@ class MenuCheck {
         }
 
         fun notOnlyDrink(menu: MutableMap<String, Int>, errorMessage: String): Boolean {
-            allDrink.add(Menu.Drink.getallDrink().toString())
+            allDrink.add(Menu.Drink.getAllDrink().toString())
             temporaryMenu = allDrink.toString().replace("[", "")
             temporaryMenu = temporaryMenu.replace("]", "")
             temporaryMenu = temporaryMenu.replace(" ", "")
@@ -91,8 +91,6 @@ class MenuCheck {
             for (clue in menu.keys) {
                 InputView.menuQuantity += menu[clue]!!.toInt()
             }
-
-            println("총 메뉴갯수 : ${InputView.menuQuantity}")
             require(InputView.menuQuantity in 1..20) {
                 OutputView.throwIllegalArgumentException(errorMessage)
                 return true

@@ -39,8 +39,8 @@
 - [x] Computer - 총 혜택금액 출력
 - [x] Computer - 예상 결제금액 계산
 - [x] Computer - 예상 결제금액 출력
-- [ ] Computer - 이벤트배지 체크
-- [ ] Computer - 이벤트배지 출력
+- [x] Computer - 이벤트배지 체크
+- [x] Computer - 이벤트배지 출력
 
 
 ```

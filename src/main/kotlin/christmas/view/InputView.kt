@@ -3,6 +3,7 @@ package christmas.view
 import camp.nextstep.edu.missionutils.Console
 
 class InputView {
+
     companion object {
         var result = ""
         var orderDate = 0
@@ -13,10 +14,6 @@ class InputView {
         fun fromUser(): String {
             result = Console.readLine()
             return result
-        }
-
-        fun saveDate(date: Int) {
-            orderDate = date
         }
 
         fun toCatalog(inputResult: String): MutableSet<String> {
@@ -30,6 +27,10 @@ class InputView {
                     menuAndNumber.split("-")[1].toInt()
             }
             return orderMenuInventory
+        }
+
+        fun saveDate(inputdate:Int) {
+            orderDate = inputdate
         }
     }
 }

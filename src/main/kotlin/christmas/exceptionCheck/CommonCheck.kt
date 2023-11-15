@@ -4,9 +4,7 @@ import christmas.view.OutputView
 
 class CommonCheck {
     companion object {
-        fun isClearSpace(
-            inputResult: String, caseMessage: String, checksys: CheckSystem.Companion
-        ): Boolean {
+        fun isClearSpace(inputResult: String, caseMessage: String): Boolean {
             require(inputResult.replace(" ", "") != "") {
                 when (caseMessage) {
                     OutputView.REQUEST_DATE.toString() -> {
@@ -24,9 +22,7 @@ class CommonCheck {
             return false
         }
 
-        fun isBlank(
-            inputResult: String, caseMessage: String, checksys: CheckSystem.Companion
-        ): Boolean {
+        fun isBlank(inputResult: String, caseMessage: String): Boolean {
             require(inputResult.isNotBlank()) {
                 when (caseMessage) {
                     OutputView.REQUEST_DATE.toString() -> {
@@ -44,9 +40,7 @@ class CommonCheck {
             return false
         }
 
-        fun isEmpty(
-            inputResult: String, caseMessage: String, checksys: CheckSystem.Companion
-        ): Boolean {
+        fun isEmpty(inputResult: String, caseMessage: String): Boolean {
             require(inputResult.isNotEmpty()) {
                 when (caseMessage) {
                     OutputView.REQUEST_DATE.toString() -> {
@@ -64,9 +58,7 @@ class CommonCheck {
             return false
         }
 
-        fun isNull(
-            inputResult: String, caseMessage: String, checksys: CheckSystem.Companion
-        ): Boolean {
+        fun isNull(inputResult: String, caseMessage: String): Boolean {
             require(!inputResult.isNullOrEmpty() || !inputResult.isNullOrBlank()) {
                 when (caseMessage) {
                     OutputView.REQUEST_DATE.toString() -> {

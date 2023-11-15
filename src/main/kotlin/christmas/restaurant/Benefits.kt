@@ -30,7 +30,7 @@ enum class Benefits(private val koeanText: String, private var benefitBonus: Int
     }
 
     companion object {
-        var benefitInventory = 0
+        private var benefitInventory = 0
         fun getAllBenefits() {
             if (Bill.Pay.BEFORE_DISCOUNT.getPay() >= 10000) {
                 if (getXmasDday() > 0) {

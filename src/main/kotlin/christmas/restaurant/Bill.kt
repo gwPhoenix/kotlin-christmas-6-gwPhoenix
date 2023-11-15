@@ -54,9 +54,22 @@ class Bill() {
     }
 
     companion object {
-        var decemberBadge = ""
+        private var orderDate = 0
+        private var benefitpPeviewMessage = ""
+
         var beforeDiscountPay = 0
         var benefitsPay = 0
+
+        fun setVisitDate(date: Int) {
+            this.orderDate = date
+            this.benefitpPeviewMessage = "==========12월 " +
+                    "${orderDate}" + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!=========="
+        }
+
+        fun loadBenefitPreviewMessage() {
+            println("")
+            println(this.benefitpPeviewMessage)
+        }
 
         fun displayDetailPay(separateText: String) {
             when (separateText) {
@@ -103,14 +116,14 @@ class Bill() {
             println("")
         }
 
-        fun loadOderMenuInventory() {
+        private fun loadOderMenuInventory() {
             for (clue in orderMenuInventory.keys) {
                 println("${clue} ${orderMenuInventory[clue]}개")
             }
         }
 
 
-        fun loadPayBeforeDiscount() {
+        private fun loadPayBeforeDiscount() {
             Pay.BEFORE_DISCOUNT.setPay(0)
             beforeDiscountPay = 0
             for (clue in orderMenuInventory.keys) {
@@ -127,7 +140,7 @@ class Bill() {
             println(OutputView.priceFormat(Pay.BEFORE_DISCOUNT.getPay()))
         }
 
-        fun loadBenefitsPay():Int {
+        private fun loadBenefitsPay(): Int {
             Pay.BENEFIT.setPay(0)
             benefitsPay = 0
 
@@ -142,7 +155,7 @@ class Bill() {
             return Pay.BENEFIT.getPay()
         }
 
-        fun loadPayAfterDiscount() {
+        private fun loadPayAfterDiscount() {
             Pay.BENEFIT.setPay(0)
             benefitsPay = 0
 
@@ -155,7 +168,7 @@ class Bill() {
             println(OutputView.priceFormat(Pay.AFTER_DISCOUNT.getPay()))
         }
 
-        fun loadGiftMenu() {
+        private fun loadGiftMenu() {
             Benefits.GIFT_EVENT.setBonus(0)
             if (Pay.BEFORE_DISCOUNT.getPay() >= 120000) {
                 Benefits.GIFT_EVENT.setBonus(25000)
@@ -165,13 +178,12 @@ class Bill() {
             }
         }
 
-        fun loadBenifits() {
+        private fun loadBenifits() {
             Benefits.getAllBenefits()
         }
 
 
-
-        fun loadEventBadge() {
+        private fun loadEventBadge() {
             var pay = loadBenefitsPay()
             when (pay) {
                 in 20000..Int.MAX_VALUE -> println(EventBadge.SANTA.koreanText)
@@ -181,6 +193,8 @@ class Bill() {
             }
         }
     }
+
+
 }
 
 

@@ -5,20 +5,18 @@ import christmas.view.InputView
 
 class ErrorCase {
     companion object {
-        fun commonCheck(
-            inputResult: String, caseMessage: String, checkSys: CheckSystem.Companion
-        ): Boolean {
+        fun commonCheck(inputResult: String, caseMessage: String): Boolean {
             if (!checkResult) {
-                checkResult = CommonCheck.isClearSpace(inputResult, caseMessage, checkSys)
+                checkResult = CommonCheck.isClearSpace(inputResult, caseMessage)
             }
             if (!checkResult) {
-                checkResult = CommonCheck.isBlank(inputResult, caseMessage, checkSys)
+                checkResult = CommonCheck.isBlank(inputResult, caseMessage)
             }
             if (!checkResult) {
-                checkResult = CommonCheck.isEmpty(inputResult, caseMessage, checkSys)
+                checkResult = CommonCheck.isEmpty(inputResult, caseMessage)
             }
             if (!checkResult) {
-                checkResult = CommonCheck.isNull(inputResult, caseMessage, checkSys)
+                checkResult = CommonCheck.isNull(inputResult, caseMessage)
             }
             return checkResult
         }
@@ -63,21 +61,19 @@ class ErrorCase {
                     MenuCheck.realMenu(InputView.orderMenuInventory, errorMessage)
             }
 
-            if(!CheckSystem.checkResult) {
+            if (!CheckSystem.checkResult) {
                 CheckSystem.checkResult =
                     MenuCheck.notOnlyDrink(InputView.orderMenuInventory, errorMessage)
             }
 
-            if(!CheckSystem.checkResult) {
+            if (!CheckSystem.checkResult) {
                 CheckSystem.checkResult = MenuCheck.zero(InputView.orderMenuInventory, errorMessage)
             }
 
-            if(!CheckSystem.checkResult) {
+            if (!CheckSystem.checkResult) {
                 CheckSystem.checkResult =
                     MenuCheck.overTwenty(InputView.orderMenuInventory, errorMessage)
             }
-
-            println("맵 : ${InputView.orderMenuInventory}")
             return CheckSystem.checkResult
         }
     }
