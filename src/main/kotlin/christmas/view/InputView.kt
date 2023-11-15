@@ -1,8 +1,8 @@
-package christmas
+package christmas.view
 
 import camp.nextstep.edu.missionutils.Console
 
-class Input {
+class InputView {
     companion object {
         var result = ""
         var orderDate = 0

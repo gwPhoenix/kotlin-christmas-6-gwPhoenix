@@ -1,4 +1,8 @@
-package christmas
+package christmas.exceptionCheck
+
+import christmas.restaurant.Menu
+import christmas.view.InputView
+import christmas.view.OutputView
 
 class MenuCheck {
 
@@ -12,7 +16,7 @@ class MenuCheck {
         private var temporaryMenu = ""
         fun formCheck(inputResult: String, errorMessage: String): Boolean {
             require(inputResult.matches(menuCheckRegularExpression)) {
-                Output.throwIllegalArgumentException(errorMessage)
+                OutputView.throwIllegalArgumentException(errorMessage)
                 return true
             }
             return false
@@ -40,15 +44,15 @@ class MenuCheck {
             }
 
             require(orderMenu.intersect(MenuBoard).count() == orderMenu.size) {
-                Output.throwIllegalArgumentException(errorMessage)
+                OutputView.throwIllegalArgumentException(errorMessage)
                 return true
             }
             return false
         }
 
         fun repeatMenu(errorMessage: String): Boolean {
-            require(Input.oderMenu.size == Input.orderMenuInventory.size) {
-                Output.throwIllegalArgumentException(errorMessage)
+            require(InputView.oderMenu.size == InputView.orderMenuInventory.size) {
+                OutputView.throwIllegalArgumentException(errorMessage)
                 return true
             }
             return false
@@ -66,7 +70,7 @@ class MenuCheck {
                 orderMenu.add(clue)
             }
             require(orderMenu.intersect(allDrink).count() != orderMenu.size) {
-                Output.throwIllegalArgumentException(errorMessage)
+                OutputView.throwIllegalArgumentException(errorMessage)
                 return true
             }
             return false
@@ -75,7 +79,7 @@ class MenuCheck {
         fun zero(menu: MutableMap<String, Int>, errorMessage: String): Boolean {
             for (clue in menu.keys) {
                 require(menu[clue].toString().toIntOrNull() != 0) {
-                    Output.throwIllegalArgumentException(errorMessage)
+                    OutputView.throwIllegalArgumentException(errorMessage)
                     return true
                 }
             }
@@ -83,14 +87,14 @@ class MenuCheck {
         }
 
         fun overTwenty(menu: MutableMap<String, Int>, errorMessage: String): Boolean {
-            Input.menuQuantity = 0
+            InputView.menuQuantity = 0
             for (clue in menu.keys) {
-                Input.menuQuantity += menu[clue]!!.toInt()
+                InputView.menuQuantity += menu[clue]!!.toInt()
             }
 
-            println("총 메뉴갯수 : ${Input.menuQuantity}")
-            require(Input.menuQuantity in 1..20) {
-                Output.throwIllegalArgumentException(errorMessage)
+            println("총 메뉴갯수 : ${InputView.menuQuantity}")
+            require(InputView.menuQuantity in 1..20) {
+                OutputView.throwIllegalArgumentException(errorMessage)
                 return true
             }
             return false

@@ -1,7 +1,8 @@
-package christmas
+package christmas.restaurant
 
-import christmas.Bill.Companion.beforeDiscountPay
-import christmas.Input.Companion.orderMenuInventory
+import christmas.restaurant.Bill.Companion.beforeDiscountPay
+import christmas.view.InputView
+import christmas.view.InputView.Companion.orderMenuInventory
 
 class Menu() {
 
@@ -57,7 +58,7 @@ class Menu() {
 
             fun searchMenuPrice(searchKeword: String): Int {
                 beforeDiscountPay = 0
-                beforeDiscountPay += Appetizer.getPrice(searchKeword)
+                beforeDiscountPay += getPrice(searchKeword)
                 return beforeDiscountPay
             }
         }
@@ -116,7 +117,7 @@ class Menu() {
 
             fun searchMenuPrice(searchKeword: String): Int {
                 beforeDiscountPay = 0
-                beforeDiscountPay += MainMenu.getPrice(searchKeword)
+                beforeDiscountPay += getPrice(searchKeword)
                 return beforeDiscountPay
             }
 
@@ -125,7 +126,7 @@ class Menu() {
                 mainInventory.clear()
                 mainBenefitsAmount = 0
 
-                mainInventoryText = MainMenu.getallMain()
+                mainInventoryText = getallMain()
                 mainInventoryText = mainInventoryText.replace(" ", "")
                 mainInventory = mainInventoryText.split(",").toMutableList()
                 for (clue in mainInventory) {
@@ -197,7 +198,7 @@ class Menu() {
 
             fun searchMenuPrice(searchKeword: String): Int {
                 beforeDiscountPay = 0
-                beforeDiscountPay += Drink.getPrice(searchKeword)
+                beforeDiscountPay += getPrice(searchKeword)
                 return beforeDiscountPay
             }
 
@@ -252,22 +253,32 @@ class Menu() {
                 return valueInventory
             }
 
-            fun getDrinkDessertInventory(): Int {
-                for (clue in Input.orderMenuInventory.keys) {
-                    dessertInventoryText = Drink.getallDrink()
-                    dessertInventoryText = dessertInventoryText.replace(" ", "")
-                    dessertInventory = dessertInventoryText.split(",").toMutableList()
+            fun getDessertInventory(): Int {
+                dessertInventory.clear()
+                dessertBenefitsAmount = 0
 
-                    if (clue.split(",").intersect(dessertInventory).isNotEmpty()) {
-                        beforeDiscountPay += Drink.getPrice(clue)
+                dessertInventoryText = getallDessert()
+                dessertInventoryText = dessertInventoryText.replace(" ", "")
+                dessertInventory = dessertInventoryText.split(",").toMutableList()
+                for (clue in dessertInventory) {
+                    dessertBenefitsAmount += checkDessertInventory(clue)
+                }
+                return dessertBenefitsAmount
+            }
+
+            fun checkDessertInventory(searchKey: String): Int {
+                Dessert.dessertBenefitsAmount = 0
+                for (clue in orderMenuInventory.keys) {
+                    if (clue == searchKey) {
+                        dessertBenefitsAmount += orderMenuInventory[clue]!!
                     }
                 }
-                return beforeDiscountPay
+                return dessertBenefitsAmount
             }
 
             fun searchMenuPrice(searchKeword: String): Int {
                 beforeDiscountPay = 0
-                beforeDiscountPay += Dessert.getPrice(searchKeword)
+                beforeDiscountPay += getPrice(searchKeword)
                 return beforeDiscountPay
             }
         }

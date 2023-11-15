@@ -1,6 +1,11 @@
-package christmas
+package christmas.restaurant
 
-import christmas.Input.Companion.orderMenuInventory
+import christmas.view.InputView.Companion.orderMenuInventory
+import christmas.view.OutputView
+import christmas.restaurant.Menu.Appetizer
+import christmas.restaurant.Menu.MainMenu
+import christmas.restaurant.Menu.Drink
+import christmas.restaurant.Menu.Dessert
 
 class Bill() {
     enum class Pay(private val koreanText: String, private var finalPrice: Int) {
@@ -59,7 +64,7 @@ class Bill() {
             when (separateText) {
                 Pay.BEFORE_DISCOUNT.toString() -> {
                     println("<${Pay.BEFORE_DISCOUNT.getText()}>")
-                    println(Output.priceFormat(loadPayBeforeDiscount()))
+                    println(OutputView.priceFormat(loadPayBeforeDiscount()))
                 }
 
                 Pay.BENEFIT.toString() -> {
@@ -109,20 +114,20 @@ class Bill() {
             beforeDiscountPay = 0
             for (clue in orderMenuInventory.keys) {
                 beforeDiscountPay +=
-                    christmas.Menu.Appetizer.searchMenuPrice(clue) * orderMenuInventory[clue]!!.toInt()
+                    Appetizer.searchMenuPrice(clue) * orderMenuInventory[clue]!!.toInt()
                 beforeDiscountPay +=
-                    christmas.Menu.MainMenu.searchMenuPrice(clue) * orderMenuInventory[clue]!!.toInt()
+                    MainMenu.searchMenuPrice(clue) * orderMenuInventory[clue]!!.toInt()
                 beforeDiscountPay +=
-                    christmas.Menu.Drink.searchMenuPrice(clue) * orderMenuInventory[clue]!!.toInt()
+                    Drink.searchMenuPrice(clue) * orderMenuInventory[clue]!!.toInt()
                 beforeDiscountPay +=
-                    christmas.Menu.Dessert.searchMenuPrice(clue) * orderMenuInventory[clue]!!.toInt()
+                    Dessert.searchMenuPrice(clue) * orderMenuInventory[clue]!!.toInt()
             }
             Pay.BEFORE_DISCOUNT.setPay(beforeDiscountPay)
             return Pay.BEFORE_DISCOUNT.getPay()
         }
 
         fun loadGiftMenu(): String {
-            if (Pay.BEFORE_DISCOUNT.getPay() > 120000) {
+            if (Pay.BEFORE_DISCOUNT.getPay() >= 120000) {
                 return "샴페인 1개"
             }
             return "없음"

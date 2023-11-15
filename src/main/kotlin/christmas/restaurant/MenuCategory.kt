@@ -1,4 +1,4 @@
-package christmas
+package christmas.restaurant
 
 enum class MenuCategory(private val menuText: String) {
 

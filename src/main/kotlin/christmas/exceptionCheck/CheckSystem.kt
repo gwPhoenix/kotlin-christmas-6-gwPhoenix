@@ -1,4 +1,6 @@
-package christmas
+package christmas.exceptionCheck
+
+import christmas.view.OutputView
 
 class CheckSystem(private var inputResult: String, private var caseMessage: String) {
     companion object {
@@ -14,12 +16,12 @@ class CheckSystem(private var inputResult: String, private var caseMessage: Stri
                 return true
             } else {
                 when (caseMessage) {
-                    Output.REQUEST_DATE.toString() ->
+                    OutputView.REQUEST_DATE.toString() ->
                         checkResult =
-                            ErrorCase.dateCheck(inputResult, checkResult, checkSys.dateMessage)
+                            ErrorCase.dateCheck(inputResult, checkResult, dateMessage)
 
-                    Output.REQUEST_MENU.toString() -> checkResult =
-                        ErrorCase.menuCheck(inputResult, checkResult, checkSys.menuMessage)
+                    OutputView.REQUEST_MENU.toString() -> checkResult =
+                        ErrorCase.menuCheck(inputResult, checkResult, menuMessage)
                 }
                 return checkResult
             }

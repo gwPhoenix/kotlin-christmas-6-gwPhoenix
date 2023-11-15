@@ -1,4 +1,6 @@
-package christmas
+package christmas.exceptionCheck
+
+import christmas.view.OutputView
 
 class CommonCheck {
     companion object {
@@ -7,13 +9,13 @@ class CommonCheck {
         ): Boolean {
             require(inputResult.replace(" ", "") != "") {
                 when (caseMessage) {
-                    Output.REQUEST_DATE.toString() -> {
-                        Output.throwIllegalArgumentException(checksys.dateMessage)
+                    OutputView.REQUEST_DATE.toString() -> {
+                        OutputView.throwIllegalArgumentException(CheckSystem.dateMessage)
                         return true
                     }
 
-                    Output.REQUEST_MENU.toString() -> {
-                        Output.throwIllegalArgumentException(checksys.menuMessage)
+                    OutputView.REQUEST_MENU.toString() -> {
+                        OutputView.throwIllegalArgumentException(CheckSystem.menuMessage)
                         return true
                     }
                 }
@@ -27,13 +29,13 @@ class CommonCheck {
         ): Boolean {
             require(inputResult.isNotBlank()) {
                 when (caseMessage) {
-                    Output.REQUEST_DATE.toString() -> {
-                        Output.throwIllegalArgumentException(checksys.dateMessage)
+                    OutputView.REQUEST_DATE.toString() -> {
+                        OutputView.throwIllegalArgumentException(CheckSystem.dateMessage)
                         return true
                     }
 
-                    Output.REQUEST_MENU.toString() -> {
-                        Output.throwIllegalArgumentException(checksys.menuMessage)
+                    OutputView.REQUEST_MENU.toString() -> {
+                        OutputView.throwIllegalArgumentException(CheckSystem.menuMessage)
                         return true
                     }
                 }
@@ -47,13 +49,13 @@ class CommonCheck {
         ): Boolean {
             require(inputResult.isNotEmpty()) {
                 when (caseMessage) {
-                    Output.REQUEST_DATE.toString() -> {
-                        Output.throwIllegalArgumentException(checksys.dateMessage)
+                    OutputView.REQUEST_DATE.toString() -> {
+                        OutputView.throwIllegalArgumentException(CheckSystem.dateMessage)
                         return true
                     }
 
-                    Output.REQUEST_MENU.toString() -> {
-                        Output.throwIllegalArgumentException(checksys.menuMessage)
+                    OutputView.REQUEST_MENU.toString() -> {
+                        OutputView.throwIllegalArgumentException(CheckSystem.menuMessage)
                         return true
                     }
                 }
@@ -67,13 +69,13 @@ class CommonCheck {
         ): Boolean {
             require(!inputResult.isNullOrEmpty() || !inputResult.isNullOrBlank()) {
                 when (caseMessage) {
-                    Output.REQUEST_DATE.toString() -> {
-                        Output.throwIllegalArgumentException(checksys.dateMessage)
+                    OutputView.REQUEST_DATE.toString() -> {
+                        OutputView.throwIllegalArgumentException(CheckSystem.dateMessage)
                         return true
                     }
 
-                    Output.REQUEST_MENU.toString() -> {
-                        Output.throwIllegalArgumentException(checksys.menuMessage)
+                    OutputView.REQUEST_MENU.toString() -> {
+                        OutputView.throwIllegalArgumentException(CheckSystem.menuMessage)
                         return true
                     }
                 }

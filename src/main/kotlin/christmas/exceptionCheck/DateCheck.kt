@@ -1,10 +1,12 @@
-package christmas
+package christmas.exceptionCheck
+
+import christmas.view.OutputView
 
 class DateCheck {
     companion object {
         fun notNumber(inputResult: String, errorMessage: String): Boolean {
             require(inputResult.toIntOrNull() != null) {
-                Output.throwNumberFormatException(errorMessage)
+                OutputView.throwNumberFormatException(errorMessage)
                 return true
             }
             return false
@@ -12,7 +14,7 @@ class DateCheck {
 
         fun not1To31(inputResult: String, errorMessage: String): Boolean {
             require(inputResult.toIntOrNull() in 1..31) {
-                Output.throwIllegalArgumentException(errorMessage)
+                OutputView.throwIllegalArgumentException(errorMessage)
                 return true
             }
             return false

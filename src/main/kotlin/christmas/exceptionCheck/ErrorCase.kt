@@ -1,6 +1,7 @@
-package christmas
+package christmas.exceptionCheck
 
-import christmas.CheckSystem.Companion.checkResult
+import christmas.exceptionCheck.CheckSystem.Companion.checkResult
+import christmas.view.InputView
 
 class ErrorCase {
     companion object {
@@ -35,7 +36,7 @@ class ErrorCase {
 
             if (!CheckSystem.checkResult) {
                 // 날짜=숫자가 이상없으면, 해당 날짜 저장
-                Input.saveDate(inputResult.toInt())
+                InputView.saveDate(inputResult.toInt())
             }
             return CheckSystem.checkResult
         }
@@ -46,10 +47,10 @@ class ErrorCase {
             }
             if (!CheckSystem.checkResult) {
                 // 주문형식이 문제 없으면, 셋으로 변환 후 다시 맵으로 변환
-                Input.oderMenu.clear()
-                Input.oderMenu = Input.toCatalog(inputResult)
-                Input.orderMenuInventory.clear()
-                Input.orderMenuInventory = Input.catalogToLookupTable(Input.oderMenu)
+                InputView.oderMenu.clear()
+                InputView.oderMenu = InputView.toCatalog(inputResult)
+                InputView.orderMenuInventory.clear()
+                InputView.orderMenuInventory = InputView.catalogToLookupTable(InputView.oderMenu)
             }
 
             if (!CheckSystem.checkResult) {
@@ -58,22 +59,25 @@ class ErrorCase {
 
             if (!CheckSystem.checkResult) {
                 MenuCheck.getMenuBoard()
-                CheckSystem.checkResult = MenuCheck.realMenu(Input.orderMenuInventory, errorMessage)
+                CheckSystem.checkResult =
+                    MenuCheck.realMenu(InputView.orderMenuInventory, errorMessage)
             }
 
             if(!CheckSystem.checkResult) {
-                CheckSystem.checkResult = MenuCheck.notOnlyDrink(Input.orderMenuInventory, errorMessage)
+                CheckSystem.checkResult =
+                    MenuCheck.notOnlyDrink(InputView.orderMenuInventory, errorMessage)
             }
 
             if(!CheckSystem.checkResult) {
-                CheckSystem.checkResult = MenuCheck.zero(Input.orderMenuInventory, errorMessage)
+                CheckSystem.checkResult = MenuCheck.zero(InputView.orderMenuInventory, errorMessage)
             }
 
             if(!CheckSystem.checkResult) {
-                CheckSystem.checkResult = MenuCheck.overTwenty(Input.orderMenuInventory, errorMessage)
+                CheckSystem.checkResult =
+                    MenuCheck.overTwenty(InputView.orderMenuInventory, errorMessage)
             }
 
-            println("맵 : ${Input.orderMenuInventory}")
+            println("맵 : ${InputView.orderMenuInventory}")
             return CheckSystem.checkResult
         }
     }

@@ -1,6 +1,11 @@
-package christmas
+package christmas.view
 
-enum class Output(private val textMessage: String) {
+import christmas.restaurant.Bill
+import christmas.exceptionCheck.CheckSystem
+import christmas.restaurant.Menu
+import christmas.restaurant.MenuCategory
+
+enum class OutputView(private val textMessage: String) {
     START("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다."),
     REQUEST_DATE("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)"),
     REQUEST_MENU("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (ex.크리스마스파스타-2, 제로콜라-2)"),
@@ -32,9 +37,9 @@ enum class Output(private val textMessage: String) {
         fun displayMenu() {
             CheckSystem.keepOn = true // 두번째 while문 실행을 위해 초기화
 
-            Output.getMessage(MENU_INVENTORY.toString())
-            Output.getMenuInventory()
-            Output.getMessage(MENU_LINE.toString())
+            getMessage(MENU_INVENTORY.toString())
+            getMenuInventory()
+            getMessage(MENU_LINE.toString())
         }
 
         private fun getMenuInventory() {
