@@ -2,6 +2,7 @@ package christmas.restaurant
 
 
 import christmas.view.InputView
+import christmas.view.OutputView
 import java.time.DayOfWeek
 
 enum class Benefits(private val koeanText: String, private var benefitBonus: Int) {
@@ -33,25 +34,25 @@ enum class Benefits(private val koeanText: String, private var benefitBonus: Int
         fun getAllBenefits() {
             if (Bill.Pay.BEFORE_DISCOUNT.getPay() >= 10000) {
                 if (getXmasDday() > 0) {
-                    println("${X_MAS_D_DAY.koeanText} : -${X_MAS_D_DAY.benefitBonus}원")
+                    print("${X_MAS_D_DAY.koeanText} : ")
+                    println("-${OutputView.priceFormat(X_MAS_D_DAY.benefitBonus)}")
                 }
-
                 if (getWeekDay() > 0) {
-                    println("${WEEKDAY_DISCOUNT.koeanText} : -${WEEKDAY_DISCOUNT.benefitBonus}원")
+                    print("${WEEKDAY_DISCOUNT.koeanText} : ")
+                    println("-${OutputView.priceFormat(WEEKDAY_DISCOUNT.benefitBonus)}")
                 }
-
                 if (getWeekend() > 0) {
-                    println("${WEEKEND_DISCOUNT.koeanText} : -${WEEKEND_DISCOUNT.benefitBonus}원")
+                    print("${WEEKEND_DISCOUNT.koeanText} : ")
+                    println("-${OutputView.priceFormat(WEEKEND_DISCOUNT.benefitBonus)}")
                 }
-
                 if (getSpecialStar() > 0) {
-                    println("${SPECIAL_DISCOUNT.koeanText} : -${SPECIAL_DISCOUNT.benefitBonus}원")
+                    print("${SPECIAL_DISCOUNT.koeanText} : ")
+                    println("-${OutputView.priceFormat(SPECIAL_DISCOUNT.benefitBonus)}")
                 }
-
                 if (GIFT_EVENT.getBonus() == 25000) {
-                    println("${GIFT_EVENT.koeanText} : -${GIFT_EVENT.benefitBonus}원")
+                    print("${GIFT_EVENT.koeanText} : ")
+                    println("-${OutputView.priceFormat(GIFT_EVENT.benefitBonus)}")
                 }
-
             } else {
                 println("없음")
             }

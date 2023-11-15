@@ -12,12 +12,6 @@ class Calendar {
         THIRTY_ONE31(31);
     }
 
-    enum class eventBadge(koreanText: String, basePrice: Int) {
-        STAR("별", 5000),
-        TREE("트리", 10000),
-        SANTA("산타", 20000);
-    }
-
     companion object {
         var starDayInventory = mutableListOf<Int>()
         fun weekendCheck(inputDate: Int): DayOfWeek {

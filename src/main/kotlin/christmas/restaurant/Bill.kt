@@ -67,7 +67,7 @@ class Bill() {
 
                 Pay.BENEFIT.toString() -> {
                     println("<${Pay.BENEFIT.getText()}>")
-                    loadBenefitsPay()
+                    println(OutputView.priceFormat(loadBenefitsPay()))
                 }
 
                 Pay.AFTER_DISCOUNT.toString() -> {
@@ -87,7 +87,7 @@ class Bill() {
 
                 Menu.GIFT.toString() -> {
                     println("<${Menu.GIFT.getMenu()}>")
-                    println(loadGiftMenu())
+                    loadGiftMenu()
                 }
 
                 Benefit.DETAIL.toString() -> {
@@ -97,6 +97,7 @@ class Bill() {
 
                 Event.DECEMBER_BADGE.toString() -> {
                     println("<${Event.DECEMBER_BADGE.getEvent()}>")
+                    loadEventBadge()
                 }
             }
             println("")
@@ -126,7 +127,7 @@ class Bill() {
             println(OutputView.priceFormat(Pay.BEFORE_DISCOUNT.getPay()))
         }
 
-        fun loadBenefitsPay() {
+        fun loadBenefitsPay():Int {
             Pay.BENEFIT.setPay(0)
             benefitsPay = 0
 
@@ -138,20 +139,7 @@ class Bill() {
             benefitsPay += Benefits.GIFT_EVENT.getBonus()
 
             Pay.BENEFIT.setPay(benefitsPay)
-            println(OutputView.priceFormat(Pay.BENEFIT.getPay()))
-        }
-
-        fun loadGiftMenu(): String {
-            Benefits.GIFT_EVENT.setBonus(0)
-            if (Pay.BEFORE_DISCOUNT.getPay() >= 120000) {
-                Benefits.GIFT_EVENT.setBonus(25000)
-                return "샴페인 1개"
-            }
-            return "없음"
-        }
-
-        fun loadBenifits() {
-            Benefits.getAllBenefits()
+            return Pay.BENEFIT.getPay()
         }
 
         fun loadPayAfterDiscount() {
@@ -166,21 +154,38 @@ class Bill() {
             Pay.AFTER_DISCOUNT.setPay(Pay.BEFORE_DISCOUNT.getPay() - benefitsPay)
             println(OutputView.priceFormat(Pay.AFTER_DISCOUNT.getPay()))
         }
+
+        fun loadGiftMenu() {
+            Benefits.GIFT_EVENT.setBonus(0)
+            if (Pay.BEFORE_DISCOUNT.getPay() >= 120000) {
+                Benefits.GIFT_EVENT.setBonus(25000)
+                println("샴페인 1개")
+            } else {
+                println("없음")
+            }
+        }
+
+        fun loadBenifits() {
+            Benefits.getAllBenefits()
+        }
+
+
+
+        fun loadEventBadge() {
+            var pay = loadBenefitsPay()
+            when (pay) {
+                in 20000..Int.MAX_VALUE -> println(EventBadge.SANTA.koreanText)
+                in 10000..19999 -> println(EventBadge.TREE.koreanText)
+                in 5000..9999 -> println(EventBadge.STAR.koreanText)
+                else -> println("없음")
+            }
+        }
     }
 }
 
 
 
 
-/*fun loadBage(discountPay: Int) {
-    when (discountPay) {
-        discountPay > 20000 -> println("산타")
-        discountPay in 10000..19999 -> println("트리")
-        discountPay in 5000..9999 -> println("별")
-        else -> println("없음")
-        TODO("수정중")
-    }
 
-}*/
 
 
